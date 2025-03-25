@@ -8,10 +8,13 @@ function CountDownLightSwitch(){
     let [theme,setTheme] = useState("black");
     let [count, setCount] = useState(30);
     let [timer, setTimer] = useState(false);
+    let [width,setWidth] = useState(20)
+
 
     useEffect(()=>{
         setInterval(()=>{
             setCount(count-1)
+            setWidth(width - (width/30))
         },1000 )
     },[timer])
 
@@ -34,7 +37,7 @@ function CountDownLightSwitch(){
                 <div className="toggle-container">
                     <label className="toggle-switch">
                         <input type="checkbox" id="themeToggle" checked={()=>{setToggle(!toggle)}} />
-                        <span className="slider"></span>
+                        <span className="slider" style={{width:`${width}px`}}></span>
                     </label>
                     <span>Light Mode</span>
                 </div>

@@ -7,8 +7,13 @@ function CountDownLightSwitch(){
     let [toggle, setToggle] = useState(true);
     let [theme,setTheme] = useState("black");
     let [count, setCount] = useState(30);
+    let [timer, setTimer] = useState(false);
 
-    
+    useEffect(()=>{
+        setInterval(()=>{
+            setCount(count-1)
+        },1000 )
+    },[timer])
 
     let handleToggle = ()=>{
         if(toggle == true){
@@ -16,6 +21,8 @@ function CountDownLightSwitch(){
         if(toggle == false){
             setTheme("white")}
     }
+
+
 
     return (
         <>
@@ -38,10 +45,10 @@ function CountDownLightSwitch(){
                 <div className="progress-bar">
                     <div className="progress" id="progress"></div>
                 </div>
-                <div className="timer" id="timerDisplay">30s</div>
+                <div className="timer" id="timerDisplay">{count}s</div>
                 <div className="btn-group">
-                    <button id="startButton">Start Timer</button>
-                    <button id="resetButton" style={{display: "none"}}>Reset Timer</button>
+                    <button id="startButton" onChange={()=>{setTimer(true)}}>Start Timer</button>
+                    <button id="resetButton" onChange={()=>{setTimer(false)}} style={{display: "none"}}>Reset Timer</button>
                 </div>
                 <div className="message" id="messageArea"></div>
             </div>
